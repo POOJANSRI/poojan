@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSE Admin Dashboard</title>
+    <meta name="description" content="Admin Dashboard for ACSE Department at Vignan's Foundation.">
+    <!-- Open Graph / Link Preview Tags -->
+    <meta property="og:site_name" content="ACSE Department">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acse.pages.dev/admin.html">
+    <meta property="og:title" content="ACSE Admin Dashboard">
+    <meta property="og:description" content="Admin Dashboard for ACSE Department at Vignan's Foundation.">
+    <meta property="og:image" itemprop="image" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:secure_url" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://acse.pages.dev/admin.html">
+    <meta property="twitter:title" content="ACSE Admin Dashboard">
+    <meta property="twitter:description" content="Admin Dashboard for ACSE Department at Vignan's Foundation.">
+    <meta property="twitter:image" content="https://acse.pages.dev/images/favicon.png">
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" href="https://acse.pages.dev/images/favicon.png">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #94a3b8;
+            --sidebar-active: #ffffff;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --red: #ef4444;
+            --green: #10b981;
+            --radius: 12px;
+            --transition: all 0.2s ease;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            left: 0; top: 0;
+            z-index: 100;
+        }
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .sidebar-logo {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 800; font-size: 1.1rem;
+        }
+        .sidebar-title { color: #fff; font-weight: 700; font-size: 1.1rem; line-height: 1.2; }
+        .sidebar-subtitle { color: var(--sidebar-text); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .close-sidebar-btn { display: none; background: none; border: none; color: var(--sidebar-text); font-size: 1.2rem; cursor: pointer; margin-left: auto; transition: 0.2s; }
+        .close-sidebar-btn:hover { color: #fff; }
+        
+        .sidebar-nav {
+            padding: 1rem 0;
+            flex: 1;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+        .nav-item i { font-size: 1.1rem; width: 20px; text-align: center; }
+        .nav-item:hover { color: var(--sidebar-active); background: rgba(255,255,255,0.03); }
+        .nav-item.active {
+            color: var(--sidebar-active);
+            background: rgba(79, 70, 229, 0.1);
+            border-left-color: var(--primary);
+        }
+        .nav-label { font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin: 1.5rem 1.5rem 0.5rem; font-weight: 700; }
+
+        .sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .logout-btn {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%; padding: 0.75rem;
+            background: rgba(239, 68, 68, 0.1); color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px;
+            font-family: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+        .logout-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        /* ── Main Content ── */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-header {
+            background: #fff;
+            height: 70px;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 90;
+        }
+        .page-title h1 { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+        .header-user { display: flex; align-items: center; gap: 0.75rem; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+        .user-avatar { width: 36px; height: 36px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+
+        .dashboard-grid {
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ── Cards ── */
+        .dash-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 4px rgba(15,23,42,0.02);
+            display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: space-between;
+            background: #fafafa;
+        }
+        .card-header h2 { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+        .card-header h2 i { color: var(--primary); }
+        .card-body { padding: 1.5rem; flex: 1; }
+
+        /* Add Event Form Redesign */
+        .form-row { display: flex; gap: 1.25rem; margin-bottom: 1.25rem; }
+        .form-col { flex: 1; position: relative; }
+        .dash-card label { display: block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .input-group { position: relative; display: flex; align-items: center; }
+        .input-group i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 0.9rem; transition: var(--transition); z-index: 1; }
+        .input-group textarea ~ i { top: 1.2rem; transform: none; }
+        .input-group:focus-within i { color: var(--primary); }
+        
+        .dash-input {
+            width: 100%; height: 46px; padding: 0 1rem 0 2.5rem;
+            background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px;
+            font-family: inherit; font-size: 0.88rem; color: #1e293b; transition: var(--transition);
+            outline: none; position: relative;
+        }
+        .dash-input:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79,70,229,0.1); }
+        textarea.dash-input { height: auto; padding: 1rem 1rem 1rem 2.5rem; resize: vertical; min-height: 100px; }
+        
+        .dash-input.no-icon { padding-left: 1rem; }
+        
+        .add-btn {
+            width: 100%; height: 48px;
+            background: linear-gradient(135deg, var(--primary), #7c3aed); color: #fff;
+            border: none; border-radius: 10px;
+            font-weight: 700; font-size: 0.95rem; cursor: pointer;
+            transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            margin-top: 1.5rem;
+        }
+        .add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4); }
+        .seed-btn {
+            background: rgba(241,245,249,0.8); border: 1px dashed #cbd5e1; color: #64748b;
+            font-size: 0.75rem; font-weight: 600; border-radius: 8px; padding: 0.6rem 1rem; cursor: pointer;
+            margin-top: 1rem; text-align: center; width: 100%; transition: var(--transition);
+        }
+        .seed-btn:hover { background: #e2e8f0; color: #334155; }
+
+        /* Current Events Lists */
+        .event-lists-wrapper { display: flex; gap: 1.5rem; }
+        .event-col { flex: 1; }
+        .event-col h3 { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; }
+        .admin-event-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .event-item {
+            background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 0.75rem; display: flex; align-items: flex-start; justify-content: space-between;
+            transition: var(--transition);
+        }
+        .event-item:hover { border-color: #cbd5e1; background: #fff; }
+        .delete-btn {
+            background: rgba(239,68,68,0.1); color: var(--red);
+            border: none; border-radius: 6px; padding: 0.35rem 0.6rem;
+            font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+        .delete-btn:hover { background: var(--red); color: #fff; }
+
+        /* Submissions Table */
+        .table-card { grid-column: 1 / -1; }
+        .search-wrap { position: relative; width: 300px; }
+        .search-wrap i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+        .search-wrap input {
+            width: 100%; height: 38px; padding: 0 1rem 0 2.5rem;
+            border: 1px solid var(--border-color); border-radius: 20px;
+            font-size: 0.85rem; outline: none; transition: var(--transition);
+        }
+        .search-wrap input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+        
+        .table-responsive { overflow-x: auto; }
+        .submissions-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .submissions-table th {
+            background: #f8fafc; padding: 1rem 1.5rem; font-size: 0.75rem; font-weight: 700;
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .submissions-table td {
+            padding: 1rem 1.5rem; font-size: 0.88rem;
+            border-bottom: 1px solid var(--border-color); color: var(--text-main);
+        }
+        .submissions-table tr:last-child td { border-bottom: none; }
+        .submissions-table tr:hover td { background: #f8fafc; }
+        
+        .table-controls {
+            display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem;
+        }
+        .search-action-row {
+            display: flex; align-items: center; gap: 0.8rem;
+        }
+        
+        .view-cert-link {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: rgba(79,70,229,0.1); color: var(--primary);
+            padding: 0.4rem 0.8rem; border-radius: 6px;
+            text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: var(--transition);
+        }
+        .view-cert-link:hover { background: var(--primary); color: #fff; }
+
+        /* ── Mobile Header & Backdrop ── */
+        .mobile-header {
+            display: none; align-items: center; justify-content: space-between;
+            background: #fff; padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 90;
+        }
+        .mobile-logo-wrap { display: flex; align-items: center; gap: 0.5rem; }
+        .mobile-logo-wrap .sidebar-logo { width: 32px; height: 32px; font-size: 0.9rem; }
+        .mobile-logo-wrap h2 { font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .menu-toggle-btn {
+            background: none; border: none; font-size: 1.25rem; color: var(--text-main); cursor: pointer;
+        }
+        .sidebar-backdrop {
+            display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.4);
+            z-index: 95; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .sidebar-backdrop.active { display: block; opacity: 1; }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .event-lists-wrapper { flex-direction: column; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+            .sidebar.open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .mobile-header { display: flex; }
+            .top-header { display: none; }
+            .dashboard-grid { padding: 1.5rem; }
+            .close-sidebar-btn { display: block; }
+            .form-row { flex-direction: column; gap: 0.8rem; margin-bottom: 0.8rem; }
+            .card-header { flex-direction: column; align-items: stretch; gap: 1rem; }
+            .search-wrap { width: 100%; }
+            .table-controls { align-items: stretch; }
+            .search-action-row { flex-direction: column; align-items: stretch; }
+            #refresh-submissions-btn { justify-content: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">AC</div>
+            <div>
+                <div class="sidebar-title">Admin Panel</div>
+                <div class="sidebar-subtitle">ACSE Portal</div>
+            </div>
+            <button class="close-sidebar-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="nav-label">Management</div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+            <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i> View Live Site</a>
+            <a href="portal.html" class="nav-item"><i class="fa-solid fa-graduation-cap"></i> Student Portal</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button onclick="logoutAdmin()" class="logout-btn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Secure Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- ── Main Content ── -->
+    <div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+    <main class="main-content">
+        
+        <!-- Mobile Header (Visible only on small screens) -->
+        <header class="mobile-header">
+            <div class="mobile-logo-wrap">
+                <div class="sidebar-logo">AC</div>
+                <h2>Admin</h2>
+            </div>
+            <button class="menu-toggle-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </header>
+        
+        <!-- Header -->
+        <header class="top-header">
+            <div class="page-title">
+                <h1>Overview</h1>
+            </div>
+            <div class="header-user">
+                <div class="user-avatar"><i class="fa-solid fa-user-shield"></i></div>
+                <span>Administrator</span>
+            </div>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+
+
+
+            <!-- Card 3: Submissions Table -->
+            <div class="dash-card table-card">
+                <div class="card-header">
+                    <h2><i class="fa-solid fa-inbox"></i> Student Submissions</h2>
+                    <div class="table-controls">
+                        <div class="search-action-row">
+                            <div class="search-wrap">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="submission-search" placeholder="Search name, event, winner...">
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:1rem;">
+                            <div id="search-count" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;"></div>
+                            <div id="last-updated-label" style="font-size:0.72rem;color:var(--text-muted);font-style:italic;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="submissions-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Registration No.</th>
+                                <th>Activity Participated</th>
+                                <th>Year &amp; Section</th>
+                                <th>Document</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissions-table-body">
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block;"></i>
+                                    Loading submissions securely...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <!-- Card 2: Current Events -->
+            <div class="dash-card">
+                <div class="card-header" style="flex-wrap: wrap; gap: 0.5rem;">
+                    <h2><i class="fa-solid fa-list-check"></i> Current Activities</h2>
+                    <button onclick="seedDefaultActivities()" id="seed-defaults-btn" style="font-size: 0.75rem; background: rgba(79,70,229,0.1); color: var(--primary); padding: 0.4rem 0.9rem; border: 1px solid rgba(79,70,229,0.2); border-radius: 6px; cursor: pointer; font-weight: 700; transition: 0.2s; white-space: nowrap;">
+                        <i class="fa-solid fa-rotate"></i> Set Default Activities
+                    </button>
+                </div>
+                <div class="card-body" style="background: #fafafa;">
+                    <div class="event-lists-wrapper">
+                        <div class="event-col">
+                            <ul class="admin-event-list" id="admin-cocurricular-list">
+                                <li style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Loading data...</li>
+                            </ul>
+                        </div>
+                        <div class="event-col">
+                            <ul class="admin-event-list" id="admin-curricular-list">
+                                <li style="color: var(--text-muted); font-size: 0.85rem; font-style: italic;">Loading data...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /dashboard-grid -->
+    </main>
+
+    <!-- Edit Category Modal -->
+    <div id="edit-category-modal" class="modal-backdrop" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: #fff; width: 90%; max-width: 500px; border-radius: 12px; padding: 2rem; position: relative;">
+            <button onclick="closeEditModal()" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #94a3b8;"><i class="fa-solid fa-xmark"></i></button>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; text-transform: uppercase;">Edit Activity Category</h2>
+            <form id="edit-category-form">
+                <input type="hidden" id="edit-cat-id">
+                <label style="display:block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem;">Card Title</label>
+                <input type="text" id="edit-cat-title" class="dash-input" style="margin-bottom: 1rem;" required>
+                
+                <label style="display:block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem;">Subtitle (Features)</label>
+                <input type="text" id="edit-cat-subtitle" class="dash-input" style="margin-bottom: 1rem;" required>
+                
+                <label style="display:block; font-size: 0.75rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem;">Description</label>
+                <textarea id="edit-cat-desc" class="dash-input" style="min-height: 80px; margin-bottom: 1.5rem;" required></textarea>
+                
+                <button type="submit" class="add-btn" id="edit-cat-save-btn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Custom Event Modal -->
+    <div id="edit-event-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1001; align-items:center; justify-content:center;">
+        <div style="background:#fff; width:90%; max-width:480px; border-radius:16px; padding:2rem; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.2);">
+            <button class="close-edit-event-btn" onclick="document.getElementById('edit-event-modal').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.2rem; cursor:pointer; color:#94a3b8;"><i class="fa-solid fa-xmark"></i></button>
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.5rem;">
+                <div style="width:40px;height:40px;background:rgba(245,158,11,0.12);color:#f59e0b;border-radius:10px;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-pen-to-square"></i></div>
+                <h2 style="font-size:1.1rem; font-weight:800; color:#1e293b; margin:0;">Edit Custom Activity</h2>
+            </div>
+            <form id="edit-event-form-inner">
+                <input type="hidden" id="edit-event-id">
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.5px;">Activity Name *</label>
+                <input type="text" id="edit-event-name" class="dash-input" style="margin-bottom:1rem;" required>
+
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.5px;">Category *</label>
+                <select id="edit-event-category" class="dash-input" style="margin-bottom:1rem;">
+                    <option value="cocurricular">Co-curricular</option>
+                    <option value="curricular">Curricular</option>
+                </select>
+
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.5px;">Date / Period</label>
+                <input type="text" id="edit-event-date" class="dash-input" style="margin-bottom:1rem;" placeholder="e.g. Oct 15 - Oct 16">
+
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.5px;">Target Audience / Details</label>
+                <input type="text" id="edit-event-details" class="dash-input" style="margin-bottom:1rem;" placeholder="e.g. 2nd Year Only">
+
+                <label style="display:block;font-size:0.72rem;font-weight:700;color:#475569;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.5px;">Description</label>
+                <textarea id="edit-event-desc" class="dash-input" style="min-height:70px;margin-bottom:1.5rem;" placeholder="Brief description..."></textarea>
+
+                <button type="submit" id="edit-event-save-btn" style="width:100%;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;border:none;border-radius:10px;padding:0.75rem;font-size:0.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- We override loadSubmissions temporarily to fix styling of the loaded rows to match the new table format -->
+    <script src="js/admin.js"></script>
+    <script>
+        // Override loadSubmissions to output our new sleek row styling while keeping the logic intact.
+        async function loadSubmissions() {
+            const tableBody = document.getElementById('submissions-table-body');
+            tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:3rem; color:var(--text-muted);"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading...</td></tr>';
+        
+            try {
+                const snapshot = await db.collection("submissions").orderBy("submittedAt", "desc").get();
+                tableBody.innerHTML = '';
+        
+                if (snapshot.empty) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:3rem; color:var(--text-muted);">No certificates submitted yet.</td></tr>';
+                    const countEl = document.getElementById('search-count');
+                    if (countEl) countEl.textContent = 'Showing 0 participants';
+                    return;
+                }
+                
+                const countEl = document.getElementById('search-count');
+                if (countEl) countEl.textContent = `Showing ${snapshot.size} participant${snapshot.size === 1 ? '' : 's'}`;
+        
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td style="font-weight:600; color:var(--text-main);">${data.name}</td>
+                        <td><span style="background:#f1f5f9; padding:0.2rem 0.6rem; border-radius:4px; font-family:monospace; font-size:0.8rem;">${data.regNo}</span></td>
+                        <td>
+                            <span style="display:inline-flex; align-items:center; gap:0.4rem;"><i class="fa-solid fa-tag" style="color:var(--text-muted); font-size:0.7rem;"></i> ${data.event}</span>
+                            ${data.role ? `<div style="font-size: 0.75rem; color: var(--primary); margin-top: 4px; font-weight: 700;">Role: ${data.role}</div>` : ''}
+                        </td>
+                        <td>${data.year} - ${data.section}</td>
+                        <td>
+                            <a href="${data.certificateUrl}" target="_blank" class="view-cert-link">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> View Cert
+                            </a>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Error loading submissions:", error);
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:3rem; color:var(--red);">Error loading data. Check console.</td></tr>';
+            }
+        }
+        // Call it immediately to overwrite the initial load triggered by admin.js
+        setTimeout(loadSubmissions, 50);
+
+        // Mobile Sidebar Toggle Logic
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            const backdrop = document.querySelector('.sidebar-backdrop');
+            if (backdrop.classList.contains('active')) {
+                backdrop.classList.remove('active');
+                setTimeout(() => backdrop.style.display = 'none', 300);
+            } else {
+                backdrop.style.display = 'block';
+                // Trigger reflow for transition
+                backdrop.offsetHeight;
+                backdrop.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — ACSE Certification Portal</title>
+    <meta name="description" content="Secure admin login for the ACSE Certification Collection Portal.">
+    <!-- Open Graph / Link Preview Tags -->
+    <meta property="og:site_name" content="ACSE Department">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acse.pages.dev/login.html">
+    <meta property="og:title" content="Admin Login — ACSE Certification Portal">
+    <meta property="og:description" content="Secure admin login for the ACSE Certification Collection Portal.">
+    <meta property="og:image" itemprop="image" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:secure_url" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://acse.pages.dev/login.html">
+    <meta property="twitter:title" content="Admin Login — ACSE Certification Portal">
+    <meta property="twitter:description" content="Secure admin login for the ACSE Certification Collection Portal.">
+    <meta property="twitter:image" content="https://acse.pages.dev/images/favicon.png">
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" href="https://acse.pages.dev/images/favicon.png">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --input-bg: #ffffff;
+            --transition: all 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* ── Login Card Container ── */
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px -10px rgba(15, 23, 42, 0.08), 
+                        0 0 0 1px rgba(15, 23, 42, 0.03);
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        /* ── Header ── */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+        .login-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: var(--text-main);
+            margin-bottom: 0.4rem;
+        }
+        .login-header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Form Fields ── */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper input {
+            width: 100%;
+            height: 44px;
+            padding: 0 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: var(--transition);
+            outline: none;
+        }
+        .input-wrapper input::placeholder {
+            color: #94a3b8;
+        }
+        .input-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .input-wrapper.has-icon input {
+            padding-right: 2.5rem;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
+        /* ── Error Message ── */
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.7rem 0.9rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        .error-message i { margin-top: 2px; }
+        .error-message.visible { display: flex; }
+
+        /* ── Submit Button ── */
+        .submit-btn {
+            width: 100%;
+            height: 46px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        .submit-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ── Footer Elements ── */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            color: #10b981;
+            font-weight: 500;
+            margin-top: 1.5rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            transition: var(--transition);
+        }
+        .back-link:hover {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="login-header">
+            <div class="logo-mark">AC</div>
+            <h1>Admin Login</h1>
+            <p>ACSE Certification Portal</p>
+        </div>
+
+        <div class="error-message" id="error-msg">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Incorrect username or password. Please verify your credentials and try again.</span>
+        </div>
+
+        <form id="login-form" autocomplete="off">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Enter admin username" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper has-icon">
+                    <input type="password" id="password" placeholder="Enter your password" required autocomplete="off">
+                    <button type="button" class="toggle-password" id="toggle-pw" aria-label="Toggle password visibility">
+                        <i class="fa-regular fa-eye" id="toggle-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="login-btn">
+                Secure Sign In
+            </button>
+        </form>
+
+        <div class="security-badge">
+            <i class="fa-solid fa-lock"></i>
+            Authorised Access Only
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        Return to Home
+    </a>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('toggle-pw').addEventListener('click', function () {
+            const pwInput = document.getElementById('password');
+            const icon = document.getElementById('toggle-icon');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+                icon.className = 'fa-regular fa-eye-slash';
+            } else {
+                pwInput.type = 'password';
+                icon.className = 'fa-regular fa-eye';
+            }
+        });
+
+        // Hide error message on typing
+        ['username', 'password'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                document.getElementById('error-msg').classList.remove('visible');
+            });
+        });
+    </script>
+    <script src="js/login.js"></script>
+</body>
+</html>

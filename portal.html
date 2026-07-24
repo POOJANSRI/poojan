@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSE Student Portal</title>
+    <meta name="description" content="Student portal for ACSE Department at Vignan's Foundation.">
+    <!-- Open Graph / Link Preview Tags -->
+    <meta property="og:site_name" content="ACSE Department">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acse.pages.dev/portal.html">
+    <meta property="og:title" content="ACSE Student Portal">
+    <meta property="og:description" content="Student portal for ACSE Department at Vignan's Foundation.">
+    <meta property="og:image" itemprop="image" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:secure_url" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://acse.pages.dev/portal.html">
+    <meta property="twitter:title" content="ACSE Student Portal">
+    <meta property="twitter:description" content="Student portal for ACSE Department at Vignan's Foundation.">
+    <meta property="twitter:image" content="https://acse.pages.dev/images/favicon.png">
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" href="https://acse.pages.dev/images/favicon.png">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=10">
+</head>
+<body>
+<div style="display: block;">
+
+    <!-- Top Navigation Bar -->
+    <header class="dash-top-header portal-header">
+        <div class="portal-logo-wrap">
+            <img src="images/favicon.png" alt="ACSE Logo">
+            <div class="logo-text">
+                <h1 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--text);">Student Portal</h1>
+                <span style="font-size: 0.8rem; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">ACSE Department</span>
+            </div>
+        </div>
+        
+        <nav class="portal-nav">
+            <a href="index.html" class="home-link"><i class="fa-solid fa-house"></i> <span>Back to Home</span></a>
+            <div class="user-avatar"><i class="fa-solid fa-user-graduate"></i></div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="student-main portal-main">
+        
+        <div class="student-dash-content" style="max-width: 1400px; margin: 0 auto;">
+            
+            <div style="margin-bottom: 2rem;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin: 0;">Welcome, Student 👋</h2>
+                <p style="font-size: 0.95rem; color: var(--text-muted); margin-top: 0.3rem;">Select an event below to submit your certificate.</p>
+            </div>
+            
+            <div class="events-grid">
+
+                <!-- Competitive Exams Panel -->
+                <div class="event-card" id="competitive-exams">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(234, 88, 12, 0.1); color: var(--orange);">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <div>
+                            <h2>Competitive Exams</h2>
+                            <p>GATE, GRE, CAT, GMAT, IELTS</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Qualified in a competitive exam? Submit your rank or score along with your rank certificate (PDF, Max 1MB).
+                    </p>
+                    <button class="dash-register-btn" id="submit-competitive-btn" style="background: var(--orange); box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);">
+                        <i class="fa-solid fa-upload"></i> Submit Rank / Score
+                    </button>
+                </div>
+
+                <!-- Generic Co-Curricular Panel -->
+                <div class="event-card" id="generic-cocurricular-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h2>Co-curricular (General)</h2>
+                            <p>Hackathons, Papers, Expos</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Participated in a Hackathon, Ideathon, or Project Expo? Submit it here.
+                    </p>
+                    <button class="dash-register-btn" id="submit-generic-cocurricular-btn" style="background: #10b981; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);">
+                        <i class="fa-solid fa-certificate"></i> Submit Certificate
+                    </button>
+                </div>
+
+                <!-- NPTEL Panel -->
+                <div class="event-card" id="nptel-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h2>NPTEL Online Courses</h2>
+                            <p>Elite Silver, Gold, Topper</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Completed an NPTEL certification course? Submit your elite certificate here.
+                    </p>
+                    <button class="dash-register-btn" id="submit-nptel-btn" style="background: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);">
+                        <i class="fa-solid fa-medal"></i> Submit Certificate
+                    </button>
+                </div>
+
+                <!-- Extra-Curricular Panel -->
+                <div class="event-card" id="extra-curricular-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(236, 72, 153, 0.1); color: #ec4899;">
+                            <i class="fa-solid fa-masks-theater"></i>
+                        </div>
+                        <div>
+                            <h2>Extra-curricular</h2>
+                            <p>Sports, Games, Cultural</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Participated in sports, cultural fests, or games at university/state level? Submit your certificate here.
+                    </p>
+                    <button class="dash-register-btn" id="submit-extracurricular-btn" style="background: #ec4899; box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);">
+                        <i class="fa-solid fa-trophy"></i> Submit Certificate
+                    </button>
+                </div>
+
+                <!-- Administrative Panel -->
+                <div class="event-card" id="administrative-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(14, 165, 233, 0.1); color: #0ea5e9;">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <div>
+                            <h2>Admin & Leadership</h2>
+                            <p>Class Rep, Committees, NCC</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Were you part of a student body, committee, NCC, or held a leadership role? Submit your details.
+                    </p>
+                    <button class="dash-register-btn" id="submit-admin-btn" style="background: #0ea5e9; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);">
+                        <i class="fa-solid fa-certificate"></i> Submit Certificate
+                    </button>
+                </div>
+
+                <!-- Other Academic Panel -->
+                <div class="event-card" id="academic-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <div>
+                            <h2>Other Academic</h2>
+                            <p>Internships, Papers, Grants</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+                        Completed a funded project, published a paper, or finished an internship? Submit your proof here.
+                    </p>
+                    <button class="dash-register-btn" id="submit-academic-btn" style="background: #8b5cf6; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);">
+                        <i class="fa-solid fa-file-arrow-up"></i> Submit Certificate
+                    </button>
+                </div>
+
+            </div> <!-- /events-grid -->
+
+        </div> <!-- /student-dash-content -->
+    </main>
+
+</div>
+
+<!-- Certificate Submission Modal -->
+<div id="form-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn">&times;</button>
+
+        <div class="modal-header">
+            <h3>Certificate Submission</h3>
+            <p>Event: <span class="event-highlight" id="modal-event-name">—</span></p>
+        </div>
+
+        <form id="certificate-form">
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="event-level">Category / Level *</label>
+                    <input type="text" id="event-level" readonly required style="background: #f8fafc; font-weight: 600; color: var(--text-muted); border-color: #e2e8f0; cursor: not-allowed;">
+                </div>
+
+                <div class="form-group full-width" id="extracurricular-level-group" style="display: none;">
+                    <label for="extracurricular-level">Level of Participation *</label>
+                    <select id="extracurricular-level" style="width: 100%; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius); background: var(--surface);">
+                        <option value="">-- Select Level --</option>
+                        <option value="International">International</option>
+                        <option value="National / AIU">National / AIU</option>
+                        <option value="State / South Zone">State / South Zone</option>
+                        <option value="Inter University">Inter University</option>
+                        <option value="Inter College">Inter College</option>
+                        <option value="Inter/Intra Department">Inter/Intra Department</option>
+                    </select>
+                </div>
+
+                <div class="form-group full-width" id="event-specific-group">
+                    <label for="event-specific-name">Specific Event / Topic / Name *</label>
+                    <input type="text" id="event-specific-name" placeholder="e.g. Specific Title or Event Name" required>
+                </div>
+
+                <div class="form-group full-width" id="event-role-group">
+                    <label>Your Role in Event *</label>
+                    <div class="college-radio-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div class="college-radio-option">
+                            <input type="radio" name="event-role" id="role-winner" value="Winner">
+                            <label for="role-winner">Winner</label>
+                        </div>
+                        <div class="college-radio-option">
+                            <input type="radio" name="event-role" id="role-runner" value="Runner">
+                            <label for="role-runner">Runner</label>
+                        </div>
+                        <div class="college-radio-option">
+                            <input type="radio" name="event-role" id="role-participant" value="Participant">
+                            <label for="role-participant">Participant</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group full-width" id="nptel-grade-group" style="display: none;">
+                    <label>NPTEL Certification Grade *</label>
+                    <div class="college-radio-group" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <div class="college-radio-option">
+                            <input type="radio" name="nptel-grade" id="grade-elite" value="Elite">
+                            <label for="grade-elite">Elite</label>
+                        </div>
+                        <div class="college-radio-option">
+                            <input type="radio" name="nptel-grade" id="grade-silver" value="Elite Silver">
+                            <label for="grade-silver">Elite Silver</label>
+                        </div>
+                        <div class="college-radio-option">
+                            <input type="radio" name="nptel-grade" id="grade-gold" value="Elite Gold">
+                            <label for="grade-gold">Elite Gold</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reg-no">Registration Number *</label>
+                    <input type="text" id="reg-no" placeholder="e.g. 241FA18428" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="contact">Contact Number (10 digits) *</label>
+                    <input type="tel" id="contact" placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Contact number must be exactly 10 digits" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Year of Study *</label>
+                    <input type="text" id="year" placeholder="e.g. 3rd Year" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="branch">Branch *</label>
+                    <input type="text" id="branch" placeholder="e.g. ACSE" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="section">Section *</label>
+                    <input type="text" id="section" placeholder="e.g. A" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Are you from Vignan College? *</label>
+                    <div class="college-radio-group">
+                        <div class="college-radio-option">
+                            <input type="radio" name="other-college" id="from-vignan" value="no" checked>
+                            <label for="from-vignan">✅ Yes, from Vignan</label>
+                        </div>
+                        <div class="college-radio-option">
+                            <input type="radio" name="other-college" id="from-other" value="yes">
+                            <label for="from-other">🏫 No, from other college</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group full-width" id="college-name-group" style="display: none;">
+                    <label for="college-name">College Name *</label>
+                    <input type="text" id="college-name" placeholder="Your College Name">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="cert-file">Certificate (PDF only, Max 1MB) *</label>
+                    <input type="file" id="cert-file" accept="application/pdf" required style="width: 100%; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius);">
+                    <p id="main-file-error-msg" style="color: #ef4444; font-size: 0.8rem; display: none; margin-top: 0.3rem;"></p>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="submit-btn" id="submit-btn-text">Submit Certificate</button>
+                <button type="button" class="cancel-btn close-btn-action">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- Exam Selection Modal -->
+<div id="exam-selection-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="exam-selection-close-btn">&times;</button>
+        <div class="modal-header">
+            <h3>Select Your Competitive Exam</h3>
+            <p>Choose the exam you qualified for to upload your certificate.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
+            <button class="exam-select-btn" data-exam="GATE" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">GATE</button>
+            <button class="exam-select-btn" data-exam="GRE" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">GRE</button>
+            <button class="exam-select-btn" data-exam="CAT" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">CAT</button>
+            <button class="exam-select-btn" data-exam="GMAT" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">GMAT</button>
+            <button class="exam-select-btn" data-exam="IELTS" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">IELTS</button>
+        </div>
+    </div>
+</div>
+
+<!-- Extra-curricular Selection Modal -->
+<div id="extracurricular-selection-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="extracurricular-selection-close-btn">&times;</button>
+        <div class="modal-header">
+            <h3>Select Extra-curricular Achievement</h3>
+            <p>Choose the category of your participation.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
+            <button class="general-select-btn" data-event="Sports / Games" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">⚽ Sports / Games</button>
+            <button class="general-select-btn" data-event="Culturals" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">🎭 Culturals</button>
+        </div>
+    </div>
+</div>
+
+<!-- Co-curricular Selection Modal -->
+<div id="cocurricular-selection-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="cocurricular-selection-close-btn">&times;</button>
+        <div class="modal-header">
+            <h3>Select Co-curricular Achievement</h3>
+            <p>Choose the category of your participation.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
+            <button class="general-select-btn" data-event="Start-up Ideathon / Hackathon" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Ideathon / Hackathon</button>
+            <button class="general-select-btn" data-event="International / National / Inter Univ" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Inter/National Event</button>
+            <button class="general-select-btn" data-event="Project Expo / Paper Presentation" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Project Expo / Paper</button>
+        </div>
+    </div>
+</div>
+
+<!-- Admin & Leadership Selection Modal -->
+<div id="admin-selection-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="admin-selection-close-btn">&times;</button>
+        <div class="modal-header">
+            <h3>Select Admin & Leadership Role</h3>
+            <p>Choose the organization or body you contributed to.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
+            <button class="general-select-btn" data-event="Dept Association / Class Rep / CDMC" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Dept Assoc / CR</button>
+            <button class="general-select-btn" data-event="University Student Body" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Univ Student Body</button>
+            <button class="general-select-btn" data-event="University Committees" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Univ Committees</button>
+            <button class="general-select-btn" data-event="NCC" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">NCC</button>
+        </div>
+    </div>
+</div>
+
+<!-- Other Academic Selection Modal -->
+<div id="academic-selection-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" id="academic-selection-close-btn">&times;</button>
+        <div class="modal-header">
+            <h3>Select Academic Achievement</h3>
+            <p>Choose the specific academic milestone.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; margin-bottom: 2rem;">
+            <button class="general-select-btn" data-event="Seed Grant / In-house Stipend" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Seed Grant / Stipend</button>
+            <button class="general-select-btn" data-event="Summer Internship Program" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Summer Internship</button>
+            <button class="general-select-btn" data-event="Internship with Stipend" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Internship w/ Stipend</button>
+            <button class="general-select-btn" data-event="International Internship / Exchange" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Intl Internship/Exchange</button>
+            <button class="general-select-btn" data-event="Paper Publication" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">Paper Publication</button>
+            <button class="general-select-btn" data-event="National/State/District Recognition" style="padding: 1rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; font-weight: 600; color: var(--text);">National/State Recognition</button>
+        </div>
+    </div>
+</div>
+
+<!-- Competitive Exams Modal -->
+<div id="competitive-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn competitive-close-btn">&times;</button>
+
+        <div class="modal-header">
+            <h3>Competitive Exams Submission</h3>
+            <p>Upload your rank certificate (PDF only, max 1MB)</p>
+        </div>
+
+        <form id="competitive-form">
+            <div class="form-grid">
+
+                <div class="form-group full-width">
+                    <label for="comp-exam-name">Exam Name *</label>
+                    <input type="text" id="comp-exam-name" readonly required style="width: 100%; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius); background: #f8fafc; font-weight: 600;">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="comp-rank-score">Rank / Score *</label>
+                    <input type="text" id="comp-rank-score" placeholder="e.g. Rank 4500 or Score 7.5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comp-name">Full Name *</label>
+                    <input type="text" id="comp-name" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comp-reg-no">Registration Number *</label>
+                    <input type="text" id="comp-reg-no" placeholder="e.g. 241FA18428" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="comp-contact">Contact Number (10 digits) *</label>
+                    <input type="tel" id="comp-contact" placeholder="e.g. 9876543210" pattern="[0-9]{10}" title="Contact number must be exactly 10 digits" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comp-year">Year of Study *</label>
+                    <input type="text" id="comp-year" placeholder="e.g. 3rd Year" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="comp-branch">Branch *</label>
+                    <input type="text" id="comp-branch" placeholder="e.g. ACSE" required>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="comp-cert-file">Rank Certificate (PDF only, Max 1MB) *</label>
+                    <input type="file" id="comp-cert-file" accept="application/pdf" required style="width: 100%; padding: 0.8rem; border: 1.5px solid var(--border); border-radius: var(--radius);">
+                    <p id="file-error-msg" style="color: #ef4444; font-size: 0.8rem; display: none; margin-top: 0.3rem;"></p>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="submit-btn" id="comp-submit-btn-text">Submit Details</button>
+                <button type="button" class="cancel-btn competitive-close-btn-action">Cancel</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!-- Google Sheets + Google Drive Backend (no Firebase needed) -->
+<script src="js/portal.js?v=5"></script>
+</body>
+</html>

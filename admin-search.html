@@ -1,0 +1,560 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSE — Search Submissions</title>
+    <meta name="description" content="Search student certificate submissions for ACSE Department.">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0f1117;
+            --surface: #1a1d27;
+            --surface2: #22263a;
+            --border: #2d3148;
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.2);
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --green: #10b981;
+            --orange: #f59e0b;
+            --red: #ef4444;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        header img { width: 36px; height: 36px; border-radius: 8px; }
+        header h1 { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+        header span { font-size: 0.75rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-badge {
+            margin-left: auto;
+            background: rgba(239,68,68,0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239,68,68,0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Main ── */
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        /* ── Setup Banner ── */
+        .setup-banner {
+            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+            border: 1px solid rgba(99,102,241,0.3);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .setup-banner i { color: var(--primary); font-size: 1.3rem; margin-top: 0.1rem; flex-shrink: 0; }
+        .setup-banner p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+        .setup-banner strong { color: var(--text); }
+        .setup-banner code {
+            background: rgba(255,255,255,0.08);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            color: #a5b4fc;
+            word-break: break-all;
+        }
+
+        /* ── Search Box ── */
+        .search-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .search-section h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 1.2rem; }
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+        @media (max-width: 640px) {
+            .search-row { grid-template-columns: 1fr; }
+        }
+        .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input, .form-group select {
+            width: 100%;
+            background: var(--surface2);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+        .form-group input::placeholder { color: var(--text-muted); }
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .search-btn:hover { background: #4f46e5; transform: translateY(-1px); }
+        .clear-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+        .clear-btn:hover { border-color: var(--text-muted); color: var(--text); }
+
+        /* ── Stats Row ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem 1.2rem;
+            text-align: center;
+        }
+        .stat-card .num { font-size: 2rem; font-weight: 900; color: var(--primary); }
+        .stat-card .lbl { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.2rem; }
+
+        /* ── Results Table ── */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .results-header h3 { font-size: 1rem; font-weight: 700; }
+        .results-count { font-size: 0.85rem; color: var(--text-muted); }
+
+        .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+        thead { background: var(--surface2); }
+        thead th {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+        }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:hover { background: var(--surface2); }
+        td {
+            padding: 0.85rem 1rem;
+            color: var(--text);
+            vertical-align: middle;
+        }
+        td.muted { color: var(--text-muted); }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        .badge-general { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+        .badge-competitive { background: rgba(245,158,11,0.15); color: #fbbf24; }
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.82rem;
+            transition: color 0.2s;
+        }
+        .pdf-link:hover { color: #a5b4fc; }
+
+        /* ── States ── */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+        .empty-state i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+        .empty-state h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        .spinner {
+            display: inline-block;
+            width: 28px; height: 28px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .error-box {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--radius);
+            padding: 1rem 1.5rem;
+            color: #fca5a5;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="images/favicon.png" alt="ACSE Logo">
+    <div>
+        <h1>Submissions Search</h1>
+        <span>ACSE Department</span>
+    </div>
+    <div class="header-badge">🔒 Admin Only</div>
+</header>
+
+<main>
+
+    <!-- Setup Instructions Banner -->
+    <div class="setup-banner" id="setup-banner">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>
+            <strong>One-time setup needed:</strong> Publish your Google Sheet as CSV.
+            In Google Sheets go to <strong>File → Share → Publish to web</strong>,
+            select <strong>Entire Document</strong> and format <strong>CSV</strong>, then click Publish.
+            Copy the URL and paste it below replacing <code>https://docs.google.com/spreadsheets/d/1fUKc8hHRguhGI6bOI1vGUTxh61xvL-5DdxxCMV-sdJA/pub?output=csv</code> in the script below this page.
+            <br><br>
+            Once set up, this page will let you search all student submissions instantly.
+        </p>
+    </div>
+
+    <div class="error-box" id="error-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="error-msg"></span>
+    </div>
+
+    <!-- Search Controls -->
+    <div class="search-section">
+        <h2><i class="fa-solid fa-magnifying-glass" style="color: var(--primary); margin-right: 0.5rem;"></i>Search Submissions</h2>
+        <div class="search-row">
+            <div class="form-group">
+                <label for="search-name">Student Name</label>
+                <input type="text" id="search-name" placeholder="e.g. Poojan Sri">
+            </div>
+            <div class="form-group">
+                <label for="search-reg">Registration Number</label>
+                <input type="text" id="search-reg" placeholder="e.g. 241FA18428">
+            </div>
+            <div>
+                <button class="search-btn" id="search-btn" onclick="runSearch()">
+                    <i class="fa-solid fa-search"></i> Search
+                </button>
+            </div>
+        </div>
+        <div style="margin-top: 0.8rem; display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center;">
+            <div class="form-group" style="flex: 1; min-width: 200px;">
+                <label for="filter-type">Filter by Type</label>
+                <select id="filter-type" onchange="runSearch()">
+                    <option value="">All Types</option>
+                    <option value="general">General / Co-curricular</option>
+                    <option value="competitive">Competitive Exams</option>
+                </select>
+            </div>
+            <div class="form-group" style="flex: 1; min-width: 200px;">
+                <label for="filter-branch">Filter by Branch</label>
+                <input type="text" id="filter-branch" placeholder="e.g. ACSE, CSE">
+            </div>
+            <button class="clear-btn" onclick="clearSearch()">
+                <i class="fa-solid fa-xmark"></i> Clear
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row" style="display:none;">
+        <div class="stat-card">
+            <div class="num" id="stat-total">0</div>
+            <div class="lbl">Total Shown</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="stat-general">0</div>
+            <div class="lbl">General</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="stat-competitive">0</div>
+            <div class="lbl">Competitive</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="stat-total-all">0</div>
+            <div class="lbl">Total in Sheet</div>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results-area">
+        <div class="empty-state">
+            <i class="fa-solid fa-database"></i>
+            <h3>Enter a search term above</h3>
+            <p>Search by student name, registration number, or use filters</p>
+        </div>
+    </div>
+
+</main>
+
+<script>
+// ============================================================
+// 🔧 PASTE YOUR PUBLISHED GOOGLE SHEET CSV URL BELOW:
+// (File → Share → Publish to web → Entire Document → CSV → Publish → Copy URL)
+// ============================================================
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1fUKc8hHRguhGI6bOI1vGUTxh61xvL-5DdxxCMV-sdJA/pub?output=csv';
+
+// Column indices (0-based) matching Apps Script output
+const COL = {
+    date: 0, type: 1, name: 2, regNo: 3, contact: 4,
+    event: 5, role: 6, year: 7, branch: 8, section: 9,
+    otherCollege: 10, collegeName: 11, certLink: 12
+};
+
+let allRows = [];
+let loaded = false;
+
+// ── Load Sheet Data ──
+async function loadSheetData() {
+    if (loaded) return;
+    showLoading();
+    try {
+        const url = SHEET_CSV_URL + '&t=' + Date.now(); // cache bust
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Failed to fetch sheet data. Check your published CSV URL.');
+        const text = await res.text();
+        allRows = parseCSV(text);
+        // Skip header row
+        if (allRows.length > 0 && allRows[0][0].toLowerCase().includes('submitted')) {
+            allRows = allRows.slice(1);
+        }
+        loaded = true;
+        document.getElementById('setup-banner').style.display = 'none';
+        document.getElementById('stat-total-all').textContent = allRows.length;
+    } catch (err) {
+        showError(err.message + ' — Make sure SHEET_CSV_URL is set correctly.');
+    }
+}
+
+// ── CSV Parser ──
+function parseCSV(text) {
+    const rows = [];
+    const lines = text.split('\n');
+    for (const line of lines) {
+        if (!line.trim()) continue;
+        const cols = [];
+        let cur = '', inQ = false;
+        for (let i = 0; i < line.length; i++) {
+            const ch = line[i];
+            if (ch === '"') { inQ = !inQ; }
+            else if (ch === ',' && !inQ) { cols.push(cur); cur = ''; }
+            else { cur += ch; }
+        }
+        cols.push(cur);
+        rows.push(cols.map(c => c.replace(/^"|"$/g, '').trim()));
+    }
+    return rows;
+}
+
+// ── Search & Filter ──
+async function runSearch() {
+    if (!loaded) await loadSheetData();
+    if (!loaded) return;
+
+    const nameQ = document.getElementById('search-name').value.trim().toLowerCase();
+    const regQ = document.getElementById('search-reg').value.trim().toLowerCase();
+    const typeQ = document.getElementById('filter-type').value.trim().toLowerCase();
+    const branchQ = document.getElementById('filter-branch').value.trim().toLowerCase();
+
+    const results = allRows.filter(row => {
+        const nameMatch = !nameQ || (row[COL.name] || '').toLowerCase().includes(nameQ);
+        const regMatch = !regQ || (row[COL.regNo] || '').toLowerCase().includes(regQ);
+        const typeMatch = !typeQ || (row[COL.type] || '').toLowerCase().includes(typeQ);
+        const branchMatch = !branchQ || (row[COL.branch] || '').toLowerCase().includes(branchQ);
+        return nameMatch && regMatch && typeMatch && branchMatch;
+    });
+
+    renderResults(results);
+}
+
+function clearSearch() {
+    document.getElementById('search-name').value = '';
+    document.getElementById('search-reg').value = '';
+    document.getElementById('filter-type').value = '';
+    document.getElementById('filter-branch').value = '';
+    document.getElementById('stats-row').style.display = 'none';
+    document.getElementById('results-area').innerHTML = `
+        <div class="empty-state">
+            <i class="fa-solid fa-database"></i>
+            <h3>Enter a search term above</h3>
+            <p>Search by student name, registration number, or use filters</p>
+        </div>`;
+}
+
+// ── Render Results ──
+function renderResults(rows) {
+    const area = document.getElementById('results-area');
+    const statsRow = document.getElementById('stats-row');
+
+    if (rows.length === 0) {
+        statsRow.style.display = 'none';
+        area.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <h3>No results found</h3>
+                <p>Try different search terms or clear filters</p>
+            </div>`;
+        return;
+    }
+
+    // Update stats
+    statsRow.style.display = 'grid';
+    const general = rows.filter(r => (r[COL.type] || '').toLowerCase() !== 'competitive').length;
+    const competitive = rows.filter(r => (r[COL.type] || '').toLowerCase() === 'competitive').length;
+    document.getElementById('stat-total').textContent = rows.length;
+    document.getElementById('stat-general').textContent = general;
+    document.getElementById('stat-competitive').textContent = competitive;
+
+    const rows_html = rows.map((row, idx) => {
+        const typeVal = (row[COL.type] || 'general').toLowerCase();
+        const badgeClass = typeVal === 'competitive' ? 'badge-competitive' : 'badge-general';
+        const badgeLabel = typeVal === 'competitive' ? 'Competitive' : 'General';
+        const certLink = row[COL.certLink] || '';
+        const pdfBtn = certLink
+            ? `<a href="${certLink}" target="_blank" class="pdf-link"><i class="fa-solid fa-file-pdf"></i> View PDF</a>`
+            : `<span style="color: var(--text-muted); font-size:0.8rem;">No file</span>`;
+
+        const dateStr = row[COL.date] ? new Date(row[COL.date]).toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'}) : '—';
+
+        return `<tr>
+            <td class="muted">${idx + 1}</td>
+            <td><span class="badge ${badgeClass}">${badgeLabel}</span></td>
+            <td><strong>${row[COL.name] || '—'}</strong></td>
+            <td class="muted">${row[COL.regNo] || '—'}</td>
+            <td class="muted">${row[COL.contact] || '—'}</td>
+            <td style="max-width:220px; white-space:normal;">${row[COL.event] || '—'}</td>
+            <td class="muted">${row[COL.role] || '—'}</td>
+            <td class="muted">${row[COL.year] || '—'}</td>
+            <td class="muted">${row[COL.branch] || '—'} ${row[COL.section] ? '/ ' + row[COL.section] : ''}</td>
+            <td>${pdfBtn}</td>
+            <td class="muted" style="font-size:0.78rem;">${dateStr}</td>
+        </tr>`;
+    }).join('');
+
+    area.innerHTML = `
+        <div class="results-header">
+            <h3><i class="fa-solid fa-table-list" style="color:var(--primary);margin-right:0.4rem;"></i>Results</h3>
+            <span class="results-count">${rows.length} record${rows.length !== 1 ? 's' : ''} found</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Reg No</th>
+                        <th>Contact</th>
+                        <th>Event</th>
+                        <th>Role</th>
+                        <th>Year</th>
+                        <th>Branch / Sec</th>
+                        <th>Certificate</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>${rows_html}</tbody>
+            </table>
+        </div>`;
+}
+
+// ── UI Helpers ──
+function showLoading() {
+    document.getElementById('results-area').innerHTML = `
+        <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading submissions from Google Sheets...</p>
+        </div>`;
+}
+
+function showError(msg) {
+    const box = document.getElementById('error-box');
+    document.getElementById('error-msg').textContent = msg;
+    box.style.display = 'block';
+    document.getElementById('results-area').innerHTML = `
+        <div class="empty-state">
+            <i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;opacity:0.7;"></i>
+            <h3>Could not load data</h3>
+            <p>See the error message above for details.</p>
+        </div>`;
+}
+
+// Allow pressing Enter in search fields
+document.getElementById('search-name').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+document.getElementById('search-reg').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+document.getElementById('filter-branch').addEventListener('keydown', e => { if (e.key === 'Enter') runSearch(); });
+
+// Load data on page open
+loadSheetData();
+</script>
+</body>
+</html>

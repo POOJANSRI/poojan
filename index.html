@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACSE</title>
+    <meta name="description" content="ACSE Department at Vignan's Foundation — Certificate submissions, event management, and student activities.">
+    <!-- Open Graph / Link Preview Tags -->
+    <meta property="og:site_name" content="ACSE Department">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://acse.pages.dev/">
+    <meta property="og:title" content="ACSE Department">
+    <meta property="og:description" content="ACSE Department at Vignan's Foundation — Certificate submissions, event management, and student activities.">
+    <meta property="og:image" itemprop="image" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:secure_url" content="https://acse.pages.dev/images/favicon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://acse.pages.dev/">
+    <meta property="twitter:title" content="ACSE Department">
+    <meta property="twitter:description" content="ACSE Department at Vignan's Foundation — Certificate submissions, event management, and student activities.">
+    <meta property="twitter:image" content="https://acse.pages.dev/images/favicon.png">
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" href="https://acse.pages.dev/images/favicon.png">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+
+        /* ============================================================
+           TOKENS
+        ============================================================ */
+        :root {
+            --primary:      #4f46e5;
+            --primary-l:    #6366f1;
+            --primary-bg:   #eef2ff;
+            --accent:       #7c3aed;
+            --green:        #059669;
+            --green-bg:     #ecfdf5;
+            --orange:       #ea580c;
+            --orange-bg:    #fff7ed;
+            --teal:         #0891b2;
+            --teal-bg:      #ecfeff;
+            --pink:         #db2777;
+            --pink-bg:      #fdf2f8;
+            --blue:         #2563eb;
+            --purple:       #7c3aed;
+            --indigo:       #4f46e5;
+
+            --bg:           #ffffff;
+            --bg-soft:      #f8faff;
+            --bg-gray:      #f9fafb;
+            --border:       #e5e7eb;
+            --border-light: #f3f4f6;
+
+            --text:         #111827;
+            --text-2:       #374151;
+            --text-muted:   #6b7280;
+            --text-light:   #9ca3af;
+
+            --radius:       12px;
+            --radius-lg:    20px;
+            --shadow-sm:    0 1px 3px rgba(0,0,0,0.06);
+            --shadow:       0 4px 20px rgba(0,0,0,0.07);
+            --shadow-md:    0 8px 30px rgba(79,70,229,0.10);
+            --shadow-lg:    0 20px 50px rgba(79,70,229,0.15);
+            --transition:   all 0.28s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ============================================================
+           SCROLLING BANNER
+        ============================================================ */
+        .top-banner {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #4f46e5);
+            background-size: 200%;
+            animation: gradShift 6s linear infinite;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 9px 0;
+        }
+        @keyframes gradShift {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        .top-banner-inner {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 40s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ============================================================
+           HEADER
+        ============================================================ */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            padding: 0.8rem 0;
+            min-height: 90px;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+        .logo { display:flex; align-items:center; gap:0.7rem; text-decoration:none; }
+        .logo-mark {
+            width:38px; height:38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius:9px;
+            display:flex; align-items:center; justify-content:center;
+            color:#fff; font-size:0.9rem; font-weight:900;
+            box-shadow:0 4px 12px rgba(79,70,229,0.35);
+            flex-shrink:0;
+        }
+        .logo-text { display:flex; flex-direction:column; line-height:1; }
+        .logo-title { font-size:1.05rem; font-weight:800; color:var(--text); letter-spacing:-0.3px; }
+        .logo-sub { font-size:0.62rem; font-weight:500; color:var(--text-muted); letter-spacing:0.5px; margin-top:2px; text-transform:uppercase; }
+        .header-nav { display:flex; align-items:center; gap:0.3rem; }
+        .nav-link {
+            text-decoration:none; color:var(--text-muted); font-size:0.85rem;
+            font-weight:600; padding:0.42rem 0.9rem; border-radius:8px; transition:var(--transition);
+        }
+        .nav-link:hover { background:var(--primary-bg); color:var(--primary); }
+        .nav-btn {
+            text-decoration:none; background:var(--primary); color:#fff;
+            font-size:0.85rem; font-weight:700; padding:0.48rem 1.1rem;
+            border-radius:8px; margin-left:0.4rem; transition:var(--transition);
+            box-shadow:0 2px 10px rgba(79,70,229,0.25);
+        }
+        .nav-btn:hover { background:var(--accent); transform:translateY(-1px); }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            padding: 90px 2rem 80px;
+            background:
+                radial-gradient(ellipse 55% 50% at 5% 0%, rgba(99,102,241,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse 45% 45% at 95% 100%, rgba(124,58,237,0.07) 0%, transparent 55%),
+                var(--bg-soft);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            background:var(--primary-bg); color:var(--primary);
+            border:1px solid rgba(99,102,241,0.25);
+            font-size:0.75rem; font-weight:700; letter-spacing:1.2px;
+            text-transform:uppercase; padding:0.38rem 0.9rem;
+            border-radius:50px; margin-bottom:1.4rem;
+            animation: fadeDown 0.7s ease both;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900; line-height:1.1;
+            color: var(--text); margin-bottom:1.2rem;
+            letter-spacing:-1.5px;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+        .hero h1 .grad {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .hero-sub {
+            font-size:1.1rem; color:var(--text-muted); max-width:580px;
+            line-height:1.75; margin-bottom:2.8rem;
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+        .hero-actions {
+            display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;
+            animation: fadeUp 0.8s ease 0.3s both;
+        }
+        .btn-primary {
+            background:var(--primary); color:#fff; text-decoration:none;
+            font-weight:700; font-size:0.9rem; padding:0.75rem 1.6rem;
+            border-radius:var(--radius); transition:var(--transition);
+            box-shadow:0 4px 16px rgba(79,70,229,0.3);
+        }
+        .btn-primary:hover { background:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+        .btn-outline {
+            background:#fff; color:var(--primary); text-decoration:none;
+            font-weight:700; font-size:0.9rem; padding:0.75rem 1.6rem;
+            border-radius:var(--radius); border:1.5px solid rgba(99,102,241,0.35);
+            transition:var(--transition);
+        }
+        .btn-outline:hover { background:var(--primary-bg); transform:translateY(-2px); }
+
+        /* Stats bar */
+        .stats-bar {
+            max-width:800px; margin:4rem auto 0; padding:0 2rem;
+            display:grid; grid-template-columns:repeat(4,1fr);
+            gap:0; background:#fff; border-radius:var(--radius-lg);
+            border:1.5px solid var(--border); box-shadow:var(--shadow);
+            animation: fadeUp 0.9s ease 0.5s both;
+            overflow:hidden;
+        }
+        .stat-item {
+            padding:1.6rem 1rem; text-align:center;
+            border-right:1px solid var(--border-light);
+        }
+        .stat-item:last-child { border-right:none; }
+        .stat-num { font-size:2rem; font-weight:900; color:var(--primary); line-height:1; }
+        .stat-label { font-size:0.75rem; color:var(--text-muted); margin-top:0.3rem; font-weight:500; }
+
+        /* ============================================================
+           EVENTS GRID & CARDS
+        ============================================================ */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .event-card {
+            background: var(--surface, #ffffff);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            border: 1.5px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .event-card:nth-child(1) { border-top: 4px solid var(--orange); }
+        .event-card:nth-child(2) { border-top: 4px solid var(--green); }
+        .event-card:nth-child(3) { border-top: 4px solid var(--blue); }
+        .event-card:nth-child(4) { border-top: 4px solid var(--pink); }
+        .event-card:nth-child(5) { border-top: 4px solid var(--purple); }
+        .event-card:nth-child(6) { border-top: 4px solid var(--indigo); }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .event-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .event-card-header .icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .event-card-header h2 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .event-card p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* ============================================================
+           SECTION COMMONS
+        ============================================================ */
+        section { padding:80px 2rem; }
+        .section-inner { max-width:1200px; margin:0 auto; }
+        .section-tag {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            font-size:0.72rem; font-weight:700; letter-spacing:1.5px;
+            text-transform:uppercase; padding:0.3rem 0.8rem;
+            border-radius:50px; margin-bottom:1rem;
+        }
+        .section-heading {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight:900; color:var(--text);
+            letter-spacing:-0.8px; margin-bottom:0.8rem; line-height:1.15;
+        }
+        .section-desc { font-size:1rem; color:var(--text-muted); max-width:560px; line-height:1.7; margin-bottom:3rem; }
+
+        /* ============================================================
+           ABOUT SECTION
+        ============================================================ */
+        .about-section { background:var(--bg); }
+        .about-grid {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:5rem; align-items:center;
+        }
+        .about-img-block {
+            background:linear-gradient(135deg, var(--primary-bg), #e0e7ff);
+            border-radius:var(--radius-lg);
+            padding:3rem;
+            display:flex; flex-direction:column; gap:1.5rem;
+            border:1.5px solid rgba(99,102,241,0.15);
+            position:relative; overflow:hidden;
+        }
+        .about-img-block::before {
+            content:'';
+            position:absolute; top:-30px; right:-30px;
+            width:120px; height:120px;
+            background:linear-gradient(135deg, rgba(99,102,241,0.15), rgba(124,58,237,0.1));
+            border-radius:50%;
+        }
+        .about-feature {
+            display:flex; align-items:flex-start; gap:1rem;
+            background:#fff; border-radius:var(--radius);
+            padding:1.1rem 1.2rem; border:1px solid var(--border);
+            box-shadow:var(--shadow-sm); transition:var(--transition);
+        }
+        .about-feature:hover { box-shadow:var(--shadow-md); transform:translateX(4px); }
+        .about-feature-icon {
+            font-size:1.6rem; flex-shrink:0;
+            width:44px; height:44px;
+            background:var(--primary-bg); border-radius:10px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .about-feature h4 { font-size:0.92rem; font-weight:700; color:var(--text); margin-bottom:0.2rem; }
+        .about-feature p { font-size:0.82rem; color:var(--text-muted); line-height:1.5; }
+
+        .about-content .section-tag { background:var(--primary-bg); color:var(--primary); }
+        .about-list { list-style:none; display:flex; flex-direction:column; gap:0.8rem; }
+        .about-list li {
+            display:flex; align-items:flex-start; gap:0.75rem;
+            font-size:0.92rem; color:var(--text-2); line-height:1.6;
+        }
+        .about-list li::before {
+            content:'✓'; flex-shrink:0;
+            width:22px; height:22px;
+            background:var(--green-bg); color:var(--green);
+            border-radius:50%; font-size:0.7rem; font-weight:900;
+            display:flex; align-items:center; justify-content:center;
+            margin-top:2px;
+        }
+
+        /* ============================================================
+           EVENTS SECTION
+        ============================================================ */
+        .events-section { background:var(--bg-soft); }
+        .events-section .section-tag { background:var(--orange-bg); color:var(--orange); }
+        .events-tabs {
+            display:flex; gap:0.5rem; margin-bottom:2rem;
+            background:#fff; border:1.5px solid var(--border);
+            border-radius:var(--radius); padding:5px;
+            width:fit-content;
+        }
+        .tab-btn {
+            background:none; border:none; font-family:inherit;
+            font-size:0.85rem; font-weight:600; color:var(--text-muted);
+            padding:0.5rem 1.2rem; border-radius:8px;
+            cursor:pointer; transition:var(--transition);
+        }
+        .tab-btn.active { background:var(--primary); color:#fff; box-shadow:0 2px 8px rgba(79,70,229,0.25); }
+        .events-grid {
+            display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr));
+            gap:1.5rem;
+            grid-auto-rows: 1fr;
+        }
+        .event-card {
+            background:#fff; border:1.5px solid var(--border);
+            border-radius:var(--radius-lg); overflow:hidden;
+            transition:var(--transition); box-shadow:var(--shadow-sm);
+        }
+        .event-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:transparent; }
+        .event-card-top {
+            height:7px;
+        }
+        .event-card-body { padding:1.6rem; }
+        .event-category {
+            font-size:0.68rem; font-weight:700; letter-spacing:1.5px;
+            text-transform:uppercase; padding:0.2rem 0.6rem;
+            border-radius:50px; display:inline-block; margin-bottom:0.8rem;
+        }
+        .cat-co  { background:var(--orange-bg); color:var(--orange); }
+        .cat-cur { background:var(--teal-bg);   color:var(--teal); }
+        .event-card h3 { font-size:1.05rem; font-weight:800; color:var(--text); margin-bottom:0.5rem; }
+        .event-card p  { font-size:0.85rem; color:var(--text-muted); line-height:1.55; margin-bottom:1.2rem; flex-grow: 1; }
+        .event-card-meta { display:flex; gap:1rem; }
+        .event-meta-item { display:flex; align-items:center; gap:0.35rem; font-size:0.78rem; color:var(--text-muted); }
+
+        /* ============================================================
+           CERTIFICATE SECTION
+        ============================================================ */
+        .cert-section { background:var(--bg); }
+        .cert-section .section-tag { background:var(--green-bg); color:var(--green); }
+        .cert-grid {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:4rem; align-items:center;
+        }
+        .cert-steps { display:flex; flex-direction:column; gap:0; }
+        .step {
+            display:flex; gap:1.2rem;
+            position:relative; padding-bottom:2rem;
+        }
+        .step:last-child { padding-bottom:0; }
+        .step-line {
+            display:flex; flex-direction:column; align-items:center; flex-shrink:0;
+        }
+        .step-num {
+            width:38px; height:38px; border-radius:50%;
+            background:var(--primary); color:#fff;
+            font-size:0.85rem; font-weight:800;
+            display:flex; align-items:center; justify-content:center;
+            flex-shrink:0; box-shadow:0 4px 12px rgba(79,70,229,0.3);
+        }
+        .step-connector {
+            width:2px; flex:1; background:linear-gradient(to bottom, var(--primary-l), var(--border));
+            margin:6px 0;
+        }
+        .step:last-child .step-connector { display:none; }
+        .step-content { padding-top:6px; }
+        .step-content h4 { font-size:0.95rem; font-weight:700; color:var(--text); margin-bottom:0.3rem; }
+        .step-content p  { font-size:0.85rem; color:var(--text-muted); line-height:1.55; }
+        .cert-cta-box {
+            background:linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius:var(--radius-lg); padding:3rem 2.5rem;
+            color:#fff; text-align:center;
+            box-shadow:var(--shadow-lg);
+        }
+        .cert-cta-box h3 { font-size:1.8rem; font-weight:900; margin-bottom:0.8rem; }
+        .cert-cta-box p { font-size:0.95rem; line-height:1.6; margin-bottom:1.8rem; opacity:0.9; }
+        .cert-cta-emoji { font-size: 3.5rem; margin-bottom: 1rem; }
+        .cert-cta-footer { margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.2); }
+        .cert-cta-stats { display:grid; grid-template-columns:1fr 1fr; gap:1rem; text-align:center; }
+        .cert-cta-num { font-size: 1.8rem; font-weight: 900; }
+        .btn-white {
+            display:inline-block; background:#fff; color:var(--primary);
+            text-decoration:none; font-weight:700; font-size:0.9rem;
+            padding:0.8rem 1.8rem; border-radius:var(--radius);
+            transition:var(--transition); box-shadow:0 4px 14px rgba(0,0,0,0.15);
+        }
+        .btn-white:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+
+        /* ============================================================
+           PORTALS SECTION
+        ============================================================ */
+        .portals-section { background:var(--bg-soft); }
+        .portals-section .section-tag { background:var(--pink-bg); color:var(--pink); }
+        .portal-cards {
+            display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+            gap:1.5rem;
+        }
+        .portal-card {
+            background:#fff; border:1.5px solid var(--border);
+            border-radius:var(--radius-lg); padding:2.2rem 1.8rem;
+            text-decoration:none; color:var(--text);
+            display:flex; flex-direction:column; gap:0.6rem;
+            transition:var(--transition); box-shadow:var(--shadow-sm);
+            position:relative; overflow:hidden;
+        }
+        .portal-card::before {
+            content:''; position:absolute;
+            top:0; left:0; right:0; height:4px;
+            border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+        }
+        .portal-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:transparent; }
+        .portal-card-arrow {
+            position:absolute; bottom:1.5rem; right:1.6rem;
+            font-size:1rem; color:var(--text-light); transition:var(--transition);
+        }
+        .portal-card:hover .portal-card-arrow { color:var(--primary); transform:translateX(4px); }
+        .portal-icon { font-size:2.5rem; margin-bottom:0.4rem; display:inline-block; }
+        .portal-tag {
+            font-size:0.68rem; font-weight:700; letter-spacing:1.5px;
+            text-transform:uppercase; padding:0.2rem 0.6rem;
+            border-radius:50px; display:inline-block; width:fit-content;
+        }
+        .portal-card h2 { font-size:1.25rem; font-weight:800; }
+        .portal-card p { font-size:0.87rem; color:var(--text-muted); line-height:1.55; }
+
+        .card-student::before { background:linear-gradient(90deg,var(--primary),var(--primary-l)); }
+        .card-student .portal-tag { background:var(--primary-bg); color:var(--primary); }
+        .card-student h2 { color:var(--primary); }
+
+        .card-admin::before { background:linear-gradient(90deg,var(--accent),var(--pink)); }
+        .card-admin .portal-tag { background:var(--pink-bg); color:var(--pink); }
+        .card-admin h2 { color:var(--accent);        }
+        .card-login::before { background:linear-gradient(90deg,var(--green),#34d399); }
+        .card-login .portal-tag { background:var(--green-bg); color:var(--green); }
+        .card-login h2 { color:var(--green); }
+
+        /* ============================================================
+           FOOTER  — Premium Professional
+        ============================================================ */
+        .site-footer { color:#e2e8f0; overflow:hidden; }
+
+        /* Accent bar at very top of footer */
+        .footer-accent-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 40%, #0891b2 100%);
+        }
+
+        /* Main footer body — 2 columns */
+        .footer-body {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            min-height: 240px;
+        }
+
+        /* LEFT — deep navy */
+        .footer-col-brand {
+            background: #0d1424;
+            padding: 3.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* CENTER — rich slate-indigo */
+        .footer-col-nav {
+            background: #111827;
+            padding: 3.5rem 2.5rem;
+        }
+
+        /* Logo */
+        .footer-logo {
+            display: flex; align-items: center; gap: 0.8rem;
+            margin-bottom: 1.4rem;
+        }
+        .footer-logo-mark {
+            width: 46px; height: 46px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1rem; font-weight: 900;
+            box-shadow: 0 4px 16px rgba(79,70,229,0.35);
+            flex-shrink: 0;
+        }
+        .footer-logo-title {
+            font-size: 1rem; font-weight: 800; color: #fff;
+            letter-spacing: -0.2px; line-height: 1.2;
+        }
+        .footer-logo-sub {
+            font-size: 0.6rem; color: rgba(255,255,255,0.4);
+            text-transform: uppercase; letter-spacing: 1px; margin-top: 2px;
+        }
+        .footer-brand-desc {
+            font-size: 0.85rem; color: rgba(255,255,255,0.5);
+            line-height: 1.8; margin-bottom: 1.8rem; max-width: 300px;
+        }
+
+        /* Nav col */
+        .footer-col-title {
+            font-size: 0.65rem; font-weight: 800;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: rgba(255,255,255,0.3); margin-bottom: 1.4rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .footer-col-title::after {
+            content: ''; flex: 1;
+            height: 1px; background: rgba(255,255,255,0.08);
+        }
+        .footer-nav-list {
+            list-style: none; display: flex; flex-direction: column; gap: 0;
+        }
+        .footer-nav-list li {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            padding: 0.4rem 0;
+        }
+        .footer-nav-list li:last-child { border-bottom: none; }
+        .footer-nav-list li a {
+            display: inline-flex; align-items: center; gap: 0.7rem;
+            font-size: 0.92rem; font-weight: 500;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none; transition: var(--transition);
+        }
+        .footer-nav-list li a .fnav-icon {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem; transition: var(--transition);
+        }
+        .footer-nav-list li a:hover { color: #fff; transform: translateX(6px); }
+        .footer-nav-list li a:hover .fnav-icon { color: var(--primary); }
+
+        /* Bottom bar */
+        .footer-bottom {
+            background: #070b14;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-bottom-inner {
+            max-width: 100%; padding: 1rem 2.5rem;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 0.5rem;
+        }
+        .footer-bottom p { font-size: 0.78rem; color: #334155; }
+        .footer-bottom-links { display: flex; gap: 1.4rem; }
+        .footer-bottom-links a {
+            font-size: 0.78rem; color: #334155;
+            text-decoration: none; transition: var(--transition);
+        }
+        .footer-bottom-links a:hover { color: #a5b4fc; }
+
+        @media (max-width: 900px) {
+            .footer-body { grid-template-columns: 1fr; }
+            .footer-col-brand { grid-column: 1/-1; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        }
+
+        /* ============================================================
+           ANIMATIONS
+        ============================================================ */
+        @keyframes fadeDown {
+            from { opacity:0; transform:translateY(-16px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(24px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity:0; transform:translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width:900px) {
+            .about-grid, .cert-grid { grid-template-columns:1fr; }
+            .footer-top { grid-template-columns:1fr 1fr; }
+            .stats-bar { grid-template-columns:repeat(2,1fr); }
+            .stats-bar .stat-item:nth-child(2) { border-right:none; }
+            
+            /* Fix Stats Row squishing on tablets */
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .stats-row .stat-item:nth-child(1), .stats-row .stat-item:nth-child(2) { border-bottom: 1px solid rgba(0,0,0,0.08); }
+            .stats-row .stat-item:nth-child(2) { border-right: none; }
+
+            .events-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width:600px) {
+            .header-nav .nav-link { display:none; }
+            .header-inner { padding: 0 1rem; }
+            .footer-top { grid-template-columns:1fr; }
+            .stats-bar { grid-template-columns:1fr 1fr; }
+            .events-grid { grid-template-columns:1fr; }
+            .hero-orbital { padding: 40px 1rem !important; }
+            .hero-content h1 { font-size: 2.2rem !important; }
+            .hero-sub { font-size: 0.9rem; margin-bottom: 1.5rem; }
+            .event-card-body { padding: 1.2rem; }
+            .about-section, .events-section, .cert-section, .activities-section { padding: 60px 1rem !important; }
+            .section-heading { font-size: 2rem; }
+            .cert-cta-box { padding: 2rem 1.5rem !important; }
+            .cert-cta-emoji { font-size: 2.5rem; }
+            .cert-cta-box h3 { font-size: 1.5rem; }
+            .cert-cta-num { font-size: 1.4rem; }
+
+            .steps-guide { 
+                padding: 1.5rem !important; 
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+        /* ============================================================
+           COMBINED HERO + ORBITAL SECTION
+        ============================================================ */
+        .hero-orbital {
+            background:
+                radial-gradient(ellipse 55% 50% at 5% 0%, rgba(99,102,241,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse 45% 45% at 95% 100%, rgba(124,58,237,0.06) 0%, transparent 55%),
+                var(--bg-soft);
+            padding: 80px 2rem;
+        }
+        .hero-orbital-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+        /* Left: text content */
+        .hero-content { display:flex; flex-direction:column; align-items:flex-start; }
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            background:var(--primary-bg); color:var(--primary);
+            border:1px solid rgba(99,102,241,0.25);
+            font-size:0.75rem; font-weight:700; letter-spacing:1.2px;
+            text-transform:uppercase; padding:0.38rem 0.9rem;
+            border-radius:50px; margin-bottom:1.4rem;
+            animation: fadeDown 0.7s ease both;
+        }
+        .hero-content h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900; line-height:1.1;
+            color: var(--text); margin-bottom:1.2rem;
+            letter-spacing:-1.5px; text-align:left;
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+        .hero-content h1 .grad {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+        }
+        .hero-sub {
+            font-size:1rem; color:var(--text-muted); max-width:480px;
+            line-height:1.75; margin-bottom:2rem;
+            animation: fadeUp 0.8s ease 0.2s both; text-align:left;
+        }
+        .hero-actions {
+            display:flex; gap:1rem; flex-wrap:wrap;
+            animation: fadeUp 0.8s ease 0.3s both;
+            margin-bottom:2.5rem;
+        }
+        /* Stats row below buttons */
+        .stats-row {
+            display:grid; grid-template-columns: repeat(4,1fr);
+            gap:0;
+            background:#fff;
+            border-radius:var(--radius-lg);
+            border:1.5px solid var(--border);
+            box-shadow:var(--shadow);
+            overflow:hidden;
+            width:100%;
+            animation: fadeUp 0.9s ease 0.5s both;
+        }
+        .stat-item {
+            padding:1.2rem 0.8rem;
+            text-align:center;
+            border-right:1px solid var(--border-light);
+        }
+        .stat-item:last-child { border-right:none; }
+        .stat-num { font-size:1.6rem; font-weight:900; color:var(--primary); line-height:1; }
+        .stat-label { font-size:0.68rem; color:var(--text-muted); margin-top:0.25rem; font-weight:500; }
+
+        /* Right: orbital */
+        .orbital-wrapper {
+            position: relative;
+            width: 420px;
+            height: 420px;
+            flex-shrink: 0;
+            margin: 0 auto;
+            animation: fadeUp 0.9s ease 0.4s both;
+        }
+        .orbit-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 360px; height: 360px;
+            border: 1.5px dashed rgba(99,102,241,0.2);
+            border-radius: 50%;
+            animation: spinOrbit 18s linear infinite;
+        }
+        .orbit-ring-2 {
+            width: 280px; height: 280px;
+            border-color: rgba(124,58,237,0.12);
+            animation: spinOrbit 22s linear infinite reverse;
+        }
+        @keyframes spinOrbit {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to   { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .orbit-center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px; height: 120px;
+            background: linear-gradient(135deg, #1e1b4b, #4f46e5);
+            border-radius: 50%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            box-shadow: 0 0 0 12px rgba(79,70,229,0.08), 0 0 0 24px rgba(79,70,229,0.04);
+            z-index: 10; color: #fff;
+        }
+        .orbit-center-title { font-size:1.5rem; font-weight:900; letter-spacing:1px; }
+        .orbit-center-sub   { font-size:0.58rem; font-weight:600; opacity:0.65; letter-spacing:2px; text-transform:uppercase; margin-top:2px; }
+        .orbit-center-dots  { display:flex; gap:4px; margin-top:6px; }
+        .orbit-center-dots span { width:5px; height:5px; border-radius:50%; }
+        .orbit-cards {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            animation: spinOrbit 18s linear infinite;
+        }
+        .orbit-card {
+            position: absolute;
+            width: 80px; height: 80px;
+            border-radius: 18px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            cursor: default;
+            animation: counterSpin 18s linear infinite;
+            transform-origin: center;
+            gap: 4px;
+        }
+        @keyframes counterSpin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(-360deg); }
+        }
+        .orbit-card i { font-size: 1.5rem; }
+        .orbit-card-text { font-size:0.65rem; font-weight:800; letter-spacing:0.5px; text-align:center; }
+        /* radius = 180px, 5 cards evenly spaced 72° apart */
+        .orbit-card:nth-child(1) { margin-left:calc(180px - 40px); margin-top:-40px;                  background:linear-gradient(135deg,#7c3aed,#6366f1); }
+        .orbit-card:nth-child(2) { margin-left:calc(55px - 40px);  margin-top:calc(171px - 40px);    background:linear-gradient(135deg,#0891b2,#06b6d4); }
+        .orbit-card:nth-child(3) { margin-left:calc(-167px - 40px);margin-top:calc(111px - 40px);    background:linear-gradient(135deg,#059669,#10b981); }
+        .orbit-card:nth-child(4) { margin-left:calc(-167px - 40px);margin-top:calc(-111px - 40px);   background:linear-gradient(135deg,#ea580c,#f97316); }
+        .orbit-card:nth-child(5) { margin-left:calc(55px - 40px);  margin-top:calc(-171px - 40px);   background:linear-gradient(135deg,#db2777,#ec4899); }
+
+        @media (max-width:1024px) {
+            .hero-orbital-inner { grid-template-columns:1fr; text-align:center; }
+            .hero-content { align-items:center; }
+            .hero-sub { text-align:center; }
+            .hero-content h1 { text-align:center; }
+            .orbital-wrapper { width:340px; height:340px; }
+            .orbit-ring { width:290px; height:290px; }
+            .orbit-card:nth-child(1) { margin-left:calc(145px - 40px); margin-top:-40px; }
+            .orbit-card:nth-child(2) { margin-left:calc(44px - 40px);  margin-top:calc(138px - 40px); }
+            .orbit-card:nth-child(3) { margin-left:calc(-135px - 40px);margin-top:calc(90px - 40px); }
+            .orbit-card:nth-child(4) { margin-left:calc(-135px - 40px);margin-top:calc(-90px - 40px); }
+            .orbit-card:nth-child(5) { margin-left:calc(44px - 40px);  margin-top:calc(-138px - 40px); }
+        }
+        @media (max-width:600px) {
+            .hero-orbital-inner { gap: 2rem; }
+            /* Exact math to fit orbital in 320px screen width without scaling bugs */
+            .orbital-wrapper { width: 280px; height: 280px; margin: 0 auto; transform: none; }
+            .orbit-ring { width: 240px; height: 240px; }
+            .orbit-center { width: 100px; height: 100px; }
+            .orbit-card:nth-child(1) { margin-left:calc(120px - 40px); margin-top:-40px; }
+            .orbit-card:nth-child(2) { margin-left:calc(37px - 40px);  margin-top:calc(114px - 40px); }
+            .orbit-card:nth-child(3) { margin-left:calc(-97px - 40px); margin-top:calc(70px - 40px); }
+            .orbit-card:nth-child(4) { margin-left:calc(-97px - 40px); margin-top:calc(-70px - 40px); }
+            .orbit-card:nth-child(5) { margin-left:calc(37px - 40px);  margin-top:calc(-114px - 40px); }
+        }
+
+        /* ============================================================
+           TABLE SECTION
+        ============================================================ */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 2rem;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1.5px solid var(--border);
+        }
+        .guidelines-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .guidelines-table th, .guidelines-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-light);
+            vertical-align: top;
+        }
+        .guidelines-table th {
+            background: var(--primary-bg);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .guidelines-table td {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.55;
+        }
+        .guidelines-table tr:last-child td {
+            border-bottom: none;
+        }
+        .guidelines-table tr:hover {
+            background: var(--bg-soft);
+        }
+        .guidelines-table .col-marks {
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+        }
+        .guidelines-table .col-type {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Scrolling University Banner ── -->
+    <div class="top-banner">
+        <span class="top-banner-inner">
+            VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY AND RESEARCH &nbsp;•&nbsp;
+            ACSE DEPARTMENT — COMPUTER SCIENCE &amp; ENGINEERING &nbsp;•&nbsp;
+            EXCELLENCE IN EDUCATION &amp; INNOVATION &nbsp;•&nbsp;
+            VIGNAN'S FOUNDATION FOR SCIENCE, TECHNOLOGY AND RESEARCH &nbsp;•&nbsp;
+            ACSE DEPARTMENT — COMPUTER SCIENCE &amp; ENGINEERING &nbsp;•&nbsp;
+            EXCELLENCE IN EDUCATION &amp; INNOVATION &nbsp;•&nbsp;
+        </span>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════ -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo" style="display:flex; align-items:center; gap:0.8rem; text-decoration:none;">
+                <img src="images/favicon.png" alt="ACSE Logo" style="height: 52px; object-fit: contain;">
+                <div class="logo-text" style="display:flex; flex-direction:column; line-height:1.2;">
+                    <span class="logo-title" style="font-size:1.15rem; font-weight:800; color:var(--text); letter-spacing:0.5px; text-transform:uppercase;">ACSE Department</span>
+                    <span class="logo-sub" style="font-size:0.75rem; font-weight:700; color:var(--primary); letter-spacing:1px; text-transform:uppercase; margin-top:2px;">A Certification Portal</span>
+                </div>
+            </a>
+            <nav class="header-nav">
+                <a href="#about"        class="nav-link">Department</a>
+                <a href="#activities"   class="nav-link">Activities</a>
+                <a href="#certificates" class="nav-link">Certificates</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO + ORBITAL (COMBINED) -->
+    <section class="hero-orbital">
+        <div class="hero-orbital-inner">
+
+            <!-- LEFT: Text + Stats -->
+            <div class="hero-content">
+                <div class="hero-badge">✦ Official Portal — 2026</div>
+                <h1>
+                    Welcome to<br>
+                    <span class="grad">ACSE Department</span>
+                </h1>
+                <p class="hero-sub">
+                    The central digital hub for students and faculty of the Applied Computer Science &amp; Engineering Department at Vignan's Foundation. Manage certificates, explore events, and stay connected.
+                </p>
+                <div class="hero-actions">
+                    <a href="portal.html" class="btn-primary"><i class="fa-solid fa-graduation-cap"></i> &nbsp;Student Portal</a>
+                    <a href="#about"      class="btn-outline">Explore Department &nbsp;<i class="fa-solid fa-arrow-down"></i></a>
+                </div>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-num">500+</div>
+                        <div class="stat-label">Students Enrolled</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">20+</div>
+                        <div class="stat-label">Annual Events</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">1000+</div>
+                        <div class="stat-label">Certificates Issued</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-num">15+</div>
+                        <div class="stat-label">Faculty Members</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Orbital -->
+            <div class="orbital-wrapper">
+                <div class="orbit-ring"></div>
+                <div class="orbit-ring orbit-ring-2"></div>
+                <div class="orbit-center">
+                    <div class="orbit-center-title">ACSE</div>
+                    <div class="orbit-center-sub">Dept Core</div>
+                    <div class="orbit-center-dots">
+                        <span style="background:#a5b4fc"></span>
+                        <span style="background:#818cf8"></span>
+                        <span style="background:#6366f1"></span>
+                    </div>
+                </div>
+                <div class="orbit-cards">
+                    <div class="orbit-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <div class="orbit-card-text">AIML</div>
+                    </div>
+                    <div class="orbit-card">
+                        <i class="fa-solid fa-database"></i>
+                        <div class="orbit-card-text">CSDS</div>
+                    </div>
+                    <div class="orbit-card">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <div class="orbit-card-text">CSBS</div>
+                    </div>
+                    <div class="orbit-card">
+                        <i class="fa-solid fa-microchip"></i>
+                        <div class="orbit-card-text">IoT</div>
+                    </div>
+                    <div class="orbit-card">
+                        <i class="fa-solid fa-robot"></i>
+                        <div class="orbit-card-text">AIDS</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         ABOUT DEPARTMENT
+    ══════════════════════════════════════════════ -->
+    <section class="about-section" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+
+                <!-- Left: Feature Cards -->
+                <div class="about-img-block reveal">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🏛️</div>
+                        <div>
+                            <h4>Established Excellence</h4>
+                            <p>A premier department under Vignan's Foundation, committed to producing industry-ready computing professionals.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">💡</div>
+                        <div>
+                            <h4>Innovation First</h4>
+                            <p>We foster creativity and critical thinking through hands-on labs, project expos, and hackathons.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🤝</div>
+                        <div>
+                            <h4>Industry Connect</h4>
+                            <p>Strong partnerships with leading tech companies ensure students are always exposed to real-world problems.</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">📊</div>
+                        <div>
+                            <h4>Research &amp; Development</h4>
+                            <p>Students and faculty actively engage in research, contributing to conferences and technical publications.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Text Content -->
+                <div class="about-content reveal">
+                    <span class="section-tag">🏛️ About the Department</span>
+                    <h2 class="section-heading">Shaping the Future of<br>Computer Science</h2>
+                    <p class="section-desc">
+                        The Applied Computer Science &amp; Engineering (ACSE) Department at Vignan's Foundation is dedicated to academic excellence, technical skills development, and holistic student growth.
+                    </p>
+                    <ul class="about-list">
+                        <li>Undergraduate B.Tech in Computer Science &amp; Engineering</li>
+                        <li>State-of-the-art computer labs and research facilities</li>
+                        <li>Regular technical workshops, seminars, and guest lectures</li>
+                        <li>Active student chapters: IEEE, CSI, and Coding Club</li>
+
+                        <li>Competitive exam preparation and certification support</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         ACTIVITIES & EVENTS
+    ══════════════════════════════════════════════ -->
+    <section class="activities-section" id="activities" style="background: var(--bg-soft);">
+        <div class="section-inner">
+            <span class="section-tag" style="background: var(--teal-bg); color: var(--teal);">🚀 Student Activities</span>
+            <h2 class="section-heading reveal">Discover Our Events</h2>
+            <p class="section-desc reveal">The ACSE department actively organizes a wide range of events to foster technical skills, leadership, and overall student development.</p>
+
+            <div class="events-grid reveal">
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(234, 88, 12, 0.1); color: var(--orange);">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h2>Hackathons & Ideathons</h2>
+                        </div>
+                    </div>
+                    <p>
+                        24-hour coding sprints and startup ideation events where students build innovative solutions for real-world problems.
+                    </p>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(16, 185, 129, 0.1); color: var(--green);">
+                            <i class="fa-solid fa-scroll"></i>
+                        </div>
+                        <div>
+                            <h2>Paper Presentations</h2>
+                        </div>
+                    </div>
+                    <p>
+                        Platform for students to present their research papers, technical articles, and innovative project ideas to industry experts.
+                    </p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(79, 70, 229, 0.1); color: var(--blue);">
+                            <i class="fa-solid fa-masks-theater"></i>
+                        </div>
+                        <div>
+                            <h2>Cultural Fests</h2>
+                        </div>
+                    </div>
+                    <p>
+                        Annual cultural extravaganzas featuring dance, music, arts, and drama, celebrating the diverse talents of our students.
+                    </p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(236, 72, 153, 0.1); color: var(--pink);">
+                            <i class="fa-solid fa-microphone-lines"></i>
+                        </div>
+                        <div>
+                            <h2>Guest Lectures</h2>
+                        </div>
+                    </div>
+                    <p>
+                        Interactive seminars and workshops conducted by eminent industry professionals and alumni to bridge the academia-industry gap.
+                    </p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(139, 92, 246, 0.1); color: var(--purple);">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h2>Sports Tournaments</h2>
+                        </div>
+                    </div>
+                    <p>
+                        Inter-department and university-level sports competitions to promote physical fitness, teamwork, and healthy competition.
+                    </p>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-card-header">
+                        <div class="icon-wrap" style="background: rgba(99, 102, 241, 0.1); color: var(--indigo);">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <h2>Club Activities</h2>
+                        </div>
+                    </div>
+                    <p>
+                        Weekly meetups, coding challenges, and collaborative projects organized by student bodies like IEEE, CSI, and the Coding Club.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         GUIDELINES
+    ══════════════════════════════════════════════ -->
+    <section class="events-section" id="certificates">
+        <div class="section-inner">
+            <span class="section-tag">📜 Submission Guide</span>
+            <h2 class="section-heading reveal">How to Submit Your Certificates</h2>
+            <p class="section-desc reveal">Follow this simple step-by-step guide to upload your achievements securely in under 2 minutes.</p>
+
+            <!-- Visual Steps Guide -->
+            <div class="reveal steps-guide" style="margin-top: 3rem; background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-xl); padding: 3rem; box-shadow: var(--shadow-sm); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; align-items: center;">
+                
+                <!-- Left Side: Image / Illustration -->
+                <div style="text-align: center; padding: 2rem; background: var(--surface-2); border-radius: var(--radius-lg); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50px; left: -50px; width: 150px; height: 150px; background: rgba(79,70,229,0.1); border-radius: 50%;"></div>
+                    <div style="position: absolute; bottom: -50px; right: -50px; width: 200px; height: 200px; background: rgba(16,185,129,0.1); border-radius: 50%;"></div>
+                    <i class="fa-solid fa-file-arrow-up" style="font-size: 6rem; color: var(--primary); position: relative; z-index: 2; margin-bottom: 1.5rem; filter: drop-shadow(0 10px 15px rgba(79,70,229,0.3));"></i>
+                    <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); position: relative; z-index: 2;">Upload in Seconds</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem; position: relative; z-index: 2;">No Google Drive links needed. Directly attach your PDF certificate.</p>
+                </div>
+
+                <!-- Right Side: Steps -->
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-main); font-weight: 800;">How to Submit:</h3>
+                    
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">1</div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.3rem;">Visit Student Portal</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Navigate to the portal and click on your event category.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">2</div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.3rem;">Fill Details</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Enter your registration number, year, and specific event name.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">3</div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.3rem;">Upload PDF</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Attach your official certificate file (Max 1MB).</p>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: #10b981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.3rem;">Submit</h4>
+                            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Your achievement is instantly recorded in the database!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FOOTER — Professional 3-Column -->
+    <footer class="site-footer">
+
+        <!-- Colored accent top bar -->
+        <div class="footer-accent-bar"></div>
+
+        <!-- 3-column body -->
+        <div class="footer-body">
+
+            <!-- LEFT: Brand -->
+            <div class="footer-col-brand">
+                <a href="login.html" class="footer-logo" style="display:flex; align-items:center; gap:0.8rem; text-decoration:none;">
+                    <img src="images/favicon.png" alt="ACSE Logo" style="height: 52px; object-fit: contain;">
+                    <div class="logo-text" style="display:flex; flex-direction:column; line-height:1.2;">
+                        <span class="logo-title" style="font-size:1.15rem; font-weight:800; color:#fff; letter-spacing:0.5px; text-transform:uppercase;">ACSE Department</span>
+                        <span class="logo-sub" style="font-size:0.75rem; font-weight:700; color:#a5b4fc; letter-spacing:1px; text-transform:uppercase; margin-top:2px;">A Certification Portal</span>
+                    </div>
+                </a>
+                <p class="footer-brand-desc">
+                    A centralised digital platform for the ACSE Department — managing certificates, events, and department records with efficiency and transparency.
+                </p>
+            </div>
+
+            <!-- CENTER: Navigation -->
+            <div class="footer-col-nav">
+                <div class="footer-col-title">Navigation</div>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html"><span class="fnav-icon"><i class="fa-solid fa-house"></i></span> Home</a></li>
+                    <li><a href="#about"><span class="fnav-icon"><i class="fa-solid fa-building-columns"></i></span> Department</a></li>
+                    <li><a href="#activities"><span class="fnav-icon"><i class="fa-solid fa-rocket"></i></span> Activities</a></li>
+                    <li><a href="#certificates"><span class="fnav-icon"><i class="fa-solid fa-scroll"></i></span> Certificates</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-inner">
+                <p style="text-align: center; line-height: 1.6;">Developed with &#x2665; by <a href="https://poojan.pages.dev" target="_blank" rel="noopener noreferrer" style="color:#a5b4fc; font-weight:700; text-decoration:none;">Poojan Sri Para</a> &nbsp;&middot;&nbsp; ACSE Portal &copy; 2026</p>
+                <div class="footer-bottom-links">
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!-- ══════════════════════════════════════════════
+         SCRIPTS
+    ══════════════════════════════════════════════ -->
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Events tab filter (works on dynamic cards too)
+        function filterEvents(cat, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('#home-events-grid .event-card').forEach(card => {
+                card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+            });
+        }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebase init
+        const firebaseConfig = {
+            apiKey: "AIzaSyBOEsI4tt0O5eurHxP2P3OO25astWC-hTw",
+            authDomain: "poojan-bc513.firebaseapp.com",
+            projectId: "poojan-bc513",
+            storageBucket: "poojan-bc513.firebasestorage.app",
+            messagingSenderId: "611741375723",
+            appId: "1:611741375723:web:bc7ca2baeee4a134e532ae"
+        };
+        try { firebase.initializeApp(firebaseConfig); } catch(e) {}
+        const homeDb = firebase.firestore();
+
+        // Color palette for cards
+        const CARD_COLORS = {
+            cocurricular: [
+                'linear-gradient(90deg,#ea580c,#f97316)',
+                'linear-gradient(90deg,#0891b2,#06b6d4)',
+                'linear-gradient(90deg,#db2777,#ec4899)',
+                'linear-gradient(90deg,#7c3aed,#8b5cf6)',
+            ],
+            curricular: [
+                'linear-gradient(90deg,#4f46e5,#6366f1)',
+                'linear-gradient(90deg,#059669,#10b981)',
+                'linear-gradient(90deg,#b45309,#d97706)',
+                'linear-gradient(90deg,#0f766e,#14b8a6)',
+            ]
+        };
+
+        async function loadHomeEvents() {
+            const grid = document.getElementById('home-events-grid');
+            if (!grid) return;
+            try {
+                const snapshot = await homeDb.collection('events').orderBy('createdAt', 'desc').get();
+
+                if (snapshot.empty) {
+                    grid.innerHTML = `
+                        <div style="grid-column:1/-1; text-align:center; padding:3rem 0; color:var(--text-muted);">
+                            <div style="font-size:2.5rem; margin-bottom:0.8rem;">📭</div>
+                            <strong>No events yet.</strong><br>
+                            <span style="font-size:0.88rem;">Admins can add events from the <a href="admin.html" style="color:var(--primary);">Admin Panel</a>.</span>
+                        </div>`;
+                    return;
+                }
+
+                grid.innerHTML = '';
+                const colorCounters = { cocurricular: 0, curricular: 0 };
+
+                snapshot.forEach(doc => {
+                    const e = doc.data();
+                    const cat = e.category || 'cocurricular';
+                    const colors = CARD_COLORS[cat] || CARD_COLORS.cocurricular;
+                    const color = colors[colorCounters[cat] % colors.length];
+                    colorCounters[cat]++;
+
+                    const labelClass = cat === 'cocurricular' ? 'cat-co' : 'cat-cur';
+                    const labelText  = cat === 'cocurricular' ? 'Co-Curricular' : 'Curricular';
+
+                    const card = document.createElement('div');
+                    card.className = 'event-card reveal';
+                    card.dataset.cat = cat;
+                    card.innerHTML = `
+                        <div class="event-card-top" style="background:${color}"></div>
+                        <div class="event-card-body">
+                            <span class="event-category ${labelClass}">${labelText}</span>
+                            <h3>${e.icon ? e.icon + ' ' : ''}${e.name}</h3>
+                            <p>${e.description || ''}</p>
+                            <div class="event-card-meta">
+                                ${e.date    ? `<span class="event-meta-item">🗓️ ${e.date}</span>` : ''}
+                                ${e.details ? `<span class="event-meta-item">👥 ${e.details}</span>` : ''}
+                            </div>
+                        </div>`;
+                    grid.appendChild(card);
+
+                    // Trigger reveal observer on new cards
+                    observer.observe(card);
+                });
+
+            } catch(err) {
+                console.error('Event load error:', err);
+                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:2rem; color:#ef4444;">
+                    Could not load events. Check your internet connection.
+                </div>`;
+            }
+        }
+
+        loadHomeEvents();
+    </script>
+</body>
+</html>

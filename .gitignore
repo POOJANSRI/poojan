@@ -1,0 +1,25 @@
+# ============================================================
+#  ACSE PORTAL — .gitignore
+# ============================================================
+
+# --- Secret / Sensitive Files ---
+.env
+.env.*
+serviceAccountKey.json
+
+# --- Firebase Admin SDK (server-side key — NEVER commit) ---
+poojan-bc513-firebase-adminsdk-fbsvc-700e83a9a8.json
+*firebase-adminsdk*.json
+
+# --- Dependencies ---
+node_modules/
+
+# --- Firebase build/debug ---
+.firebase/
+firebase-debug.log
+
+# --- Editor & OS ---
+.vscode/
+.DS_Store
+Thumbs.db
+plain.txt
